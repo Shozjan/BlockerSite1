@@ -10,7 +10,7 @@
   };
   firebase.initializeApp(config);
 var webSites=[];
-alert(config);
+//alert(config);
 preberiBazo();
 
 setInterval(function() {
@@ -53,6 +53,7 @@ function arrayToString(){
 
 function prenosVBazo(blockSites) {
     //TODO prenos v bazo glede na uporabnika
+  
     alert(blockSites);
 }
 
@@ -61,7 +62,7 @@ function preberiBazo(){
     var host="simke";
     var st="www.24ur.com";
  
-    alert("not");
+   // alert("not");
     var db = firebase.firestore();
    
     db.collection("Users").get().then(function(querySnapshot) {
@@ -69,7 +70,7 @@ function preberiBazo(){
           var user=doc.data();
           if(user.hostname==host){
             st=user.blocksites;
-            alert("not2");            
+            //alert("not2");            
             webSites = st.split(' ');                  
           }
       });
