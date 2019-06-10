@@ -12,6 +12,11 @@ $(document).ready(function(){
         if(elRegAdmin){
             elRegAdmin.addEventListener('click', redirectAdmin, false);
         } 
+
+        var gumb = document.getElementById('registration');
+        if(gumb){
+          gumb.addEventListener('click', test, false);
+        }
 });
 
 

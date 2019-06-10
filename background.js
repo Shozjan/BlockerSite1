@@ -1,5 +1,4 @@
- var config = {
-    
+ var config = { 
     apiKey: "AIzaSyCjmjSfERPRQUqGS-IYxegTEc2hXpr2tM8",
     authDomain: "blockanalyzer.firebaseapp.com",
     databaseURL: "https://blockanalyzer.firebaseio.com",
@@ -10,6 +9,8 @@
   };
   firebase.initializeApp(config);
 var webSites=[];
+
+
 //alert(config);
 preberiBazo();
 
