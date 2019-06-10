@@ -1,5 +1,18 @@
+ var config = {
+    
+    apiKey: "AIzaSyCjmjSfERPRQUqGS-IYxegTEc2hXpr2tM8",
+    authDomain: "blockanalyzer.firebaseapp.com",
+    databaseURL: "https://blockanalyzer.firebaseio.com",
+    projectId: "blockanalyzer",
+    storageBucket: "blockanalyzer.appspot.com",
+    messagingSenderId: "134357434820",
+    appId: "1:134357434820:web:cd65a6922fe15eb6"
+  };
+  firebase.initializeApp(config);
 var webSites=[];
+alert(config);
 preberiBazo();
+
 setInterval(function() {
     chrome.tabs.query({
         active: true,
@@ -16,13 +29,21 @@ setInterval(function() {
                 }
             }      
     });
-
+   
   }, 1);
 
+
  
+
+
 function dodajArray(){
     webSites.push("www.facebook.com");
-    arrayToString();
+    arrayToString();   
+}
+
+ function funkcija (host){
+    
+
 }
 
 function arrayToString(){
@@ -37,6 +58,21 @@ function prenosVBazo(blockSites) {
 
 function preberiBazo(){
     //TODO povezava z bazo glede na uporabnika
-    var string ="www.facebook.com www.24ur.com";
-    webSites = string.split(' ');
+    var host="simke";
+    var st="www.24ur.com";
+ 
+    alert("not");
+    var db = firebase.firestore();
+   
+    db.collection("Users").get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          var user=doc.data();
+          if(user.hostname==host){
+            st=user.blocksites;
+            alert("not2");            
+            webSites = st.split(' ');                  
+          }
+      });
+  });
+    
 }

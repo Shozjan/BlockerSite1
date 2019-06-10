@@ -36,7 +36,8 @@ $(document).ready(function(){
 });
 });
 
-
+  // Your web app's Firebase configuration
+  
 
 function timer(){
   var timer = setInterval(function(){
