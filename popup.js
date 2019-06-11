@@ -13,7 +13,7 @@ $(document).ready(function(){
 }, function(tabs) {
     var link=document.createElement('a');
      link.href= tabs[0].url;
-
+    
     $("#current").val(link.host);
 
      //dodan listener za spremembo tab-a v statistiko
@@ -21,6 +21,12 @@ $(document).ready(function(){
         if(elStats){
           elStats.addEventListener('click', spremeniStatiskika, false);
         }
+
+        chrome.browserAction.onClicked.addListener(function(activeTab)
+{
+    var newURL = "http://www.youtube.com/watch?v=oHg5SJYRHA0";
+    chrome.tabs.create({ url: newURL });
+});
 
         //dodan listener za spremembo tab-a v prvotno
         var elStran = document.getElementById('toStran');
@@ -30,7 +36,7 @@ $(document).ready(function(){
 
         var gumb = document.getElementById('blockBut');
         if(gumb){
-          gumb.addEventListener('click', dodajArray, false);
+          gumb.addEventListener('click', dodajVbazo, false);
         }
 
 });

@@ -10,11 +10,13 @@
   firebase.initializeApp(config);
 var webSites=[];
 
+chrome.runtime
 
 //alert(config);
-preberiBazo();
+
 
 setInterval(function() {
+ 
     chrome.tabs.query({
         active: true,
         currentWindow: true
@@ -32,20 +34,6 @@ setInterval(function() {
     });
    
   }, 1);
-
-
- 
-
-
-function dodajArray(){
-    webSites.push("www.facebook.com");
-    arrayToString();   
-}
-
- function funkcija (host){
-    
-
-}
 
 function arrayToString(){
     var blockSites=webSites.join(" ");
@@ -70,11 +58,53 @@ function preberiBazo(){
       querySnapshot.forEach(function(doc) {
           var user=doc.data();
           if(user.hostname==host){
-            st=user.blocksites;
-            //alert("not2");            
-            webSites = st.split(' ');                  
+            st=user.blocks;
+          
+            for(var i=0;i<st.length;i++){    
+              webSites.push(st[i]);
+              //alert(webSites[i]);
+            }     
+                      
           }
       });
   });
     
 }
+
+function dodajVbazo(){
+  var host="simke";
+  var db = firebase.firestore();
+  
+  setTimeout(function (){ //zaradi izvajanja..prej se mora izvesti branje
+    var current="";
+    var current_okno = document.getElementById('current');
+    if(current_okno){
+     current=current_okno.value;  
+     webSites.push(current); 
+    }
+    //Update Array for blockSites
+    db.collection("Users").get().then(function(querySnapshot) { 
+      querySnapshot.forEach(function(doc) {
+          var user=doc.data();
+          if(user.hostname=="simke"){
+
+            var docData = {
+              blocks:webSites
+            };
+            
+            db.collection("Users").doc(doc.id).update(docData).then(function() {
+              alert("Uspešno posodobljen");
+          });
+                          
+          }
+      });
+  });
+  
+  }, 1000);
+ 
+  if(webSites.length==0) //Če je prebrano polje strani enako nič
+  preberiBazo();
+ 
+
+}
+
