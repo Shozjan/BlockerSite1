@@ -5,27 +5,40 @@
     <meta name="viewport" content="width=device.width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="mystyle.css">
+    <script src="https://www.gstatic.com/firebasejs/5.11.1/firebase.js"></script>
 <title>BlockWebsites</title>
 
 </head>
 <body>
-
         <script src="jquery-3.3.1.min.js"></script>
-       <script type="text/javascript" src="registration.js"></script>  
+        <script type="text/javascript" src="registration.js"></script>  
+        <script type="text/javascript" src="API/UserAPI.js"></script>   
 <h1>Block and analyze</h1>
 <h3>Registracija uporabnik</h3>
 <label for="email"><b>Elektronska pošta</b></label>
-    <input type="text" placeholder="Vpiši e-mail" name="email" required>
+    <input type="text" placeholder="Vpiši e-mail" name="email" id="eposta" required>
 
-    <label for="psw"><b>Geslo</b></label>
-    <input type="password" placeholder="Vpiši geslo" name="psw" required>
+    <label for="psw"><b>Hostname</b></label>
+    <input type="password" name="psw" id="host" required>
 
     <label for="psw-repeat"><b>Ponovi geslo</b></label>
     <input type="password" placeholder="Ponovno vpiši geslo" name="psw-repeat" required>
-    <hr>
-  
 
-    <button type="submit" class="push_button red">Registracija</button>
+    <label for="psw"><b>Izberi dve sliki</b></label>
+    <div class="ozadje">
+      <img class="" onclick="klikSlika(this)" src="images/druzina.jpg" alt="druzina">
+      <img class="" onclick="klikSlika(this)" src="images/motor.jpg" alt="motor">
+      <img class="" onclick="klikSlika(this)" src="images/zurka.jpg" alt="zur">
+      <img class="" onclick="klikSlika(this)" src="images/st_avto.jpg" alt="st_avto">    
+      <img class="" onclick="klikSlika(this)" src="images/sp_avto.jpg" alt="sp_avto"> 
+      <img class="" onclick="klikSlika(this)" src="images/risanka.jpg" alt="risanka">   
+      <img class=""onclick="klikSlika(this)" src="images/st_avto.jpg" alt="Italian Trulli">
+    </div>
+    
+    <hr>
+
+
+    <button type="submit" id="reg" class="push_button red">Registracija</button>
   </div>
 </body>
 </html>
