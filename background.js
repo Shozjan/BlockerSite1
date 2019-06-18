@@ -7,33 +7,13 @@
     messagingSenderId: "134357434820",
     appId: "1:134357434820:web:cd65a6922fe15eb6"
   };
-  firebase.initializeApp(config);
-var webSites=[];
-
-chrome.runtime
-
-//alert(config);
-
-
-setInterval(function() {
  
-    chrome.tabs.query({
-        active: true,
-        currentWindow: true
-    }, function(tabs) {
-        var link=document.createElement('a');
-         link.href= tabs[0].url;
-        
-         var i;
-            for (i = 0; i < webSites.length; i++) { 
-                if(link.host==webSites[i])
-                {
-                   chrome.tabs.update(undefined,{url: "newtab.html"});
-                }
-            }      
-    });
-   
-  }, 1);
+  
+var webSites=[];
+firebase.auth();
+firebase.initializeApp(config);
+console.log("pred");
+preberiBazo();
 
 function arrayToString(){
     var blockSites=webSites.join(" ");
@@ -53,8 +33,9 @@ function preberiBazo(){
  
    // alert("not");
     var db = firebase.firestore();
-   
-    db.collection("Users").get().then(function(querySnapshot) {
+    var docRef = db.collection("Users");
+    
+    docRef.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           var user=doc.data();
           if(user.hostname==host){
@@ -62,13 +43,36 @@ function preberiBazo(){
           
             for(var i=0;i<st.length;i++){    
               webSites.push(st[i]);
+              alert(webSites[i]);
               //alert(webSites[i]);
             }     
                       
           }
       });
   });
-    
+
+  /*
+setInterval(function() {
+ 
+  chrome.tabs.query({
+      active: true,
+      currentWindow: true
+  }, function(tabs) {
+      var link=document.createElement('a');
+       link.href= tabs[0].url;
+      
+       var i;
+          for (i = 0; i < webSites.length; i++) { 
+              if(link.host==webSites[i])
+              {
+                 chrome.tabs.update(undefined,{url: "newtab.html"});
+              }
+          }      
+  });
+ 
+}, 1);
+
+  */  
 }
 
 function dodajVbazo(){

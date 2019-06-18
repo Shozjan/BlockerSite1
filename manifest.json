@@ -21,11 +21,11 @@
             "matches": [
                 "<all_urls>"
             ],
-            "js":["popup.js"]
+            "js":["firebase.js","firebase-firestore.js","background.js"]
         }
     ],
         "background": {
-            "scripts": ["background.js"]
+            "scripts": ["popup.js"]
           },
 
           "browser_action":{
