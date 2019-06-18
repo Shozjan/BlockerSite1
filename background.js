@@ -1,17 +1,20 @@
- var config = { 
-    apiKey: "AIzaSyCjmjSfERPRQUqGS-IYxegTEc2hXpr2tM8",
-    authDomain: "blockanalyzer.firebaseapp.com",
-    databaseURL: "https://blockanalyzer.firebaseio.com",
-    projectId: "blockanalyzer",
-    storageBucket: "blockanalyzer.appspot.com",
-    messagingSenderId: "134357434820",
-    appId: "1:134357434820:web:cd65a6922fe15eb6"
-  };
  
-  
-var webSites=[];
-firebase.auth();
+var config = { 
+  apiKey: "AIzaSyCjmjSfERPRQUqGS-IYxegTEc2hXpr2tM8",
+  authDomain: "blockanalyzer.firebaseapp.com",
+  databaseURL: "https://blockanalyzer.firebaseio.com",
+  projectId: "blockanalyzer",
+  storageBucket: "blockanalyzer.appspot.com",
+  messagingSenderId: "134357434820",
+  appId: "1:134357434820:web:cd65a6922fe15eb6"
+};
+
 firebase.initializeApp(config);
+
+var webSites=[];
+
+
+
 console.log("pred");
 preberiBazo();
 
@@ -30,11 +33,10 @@ function preberiBazo(){
     //TODO povezava z bazo glede na uporabnika
     var host="simke";
     var st="www.24ur.com";
- 
-   // alert("not");
-    var db = firebase.firestore();
-    var docRef = db.collection("Users");
-    
+   // alert("not"); 
+   var db = firebase.firestore();
+   var docRef = db.collection("Users"); 
+   console.log("4");
     docRef.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           var user=doc.data();
