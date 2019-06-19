@@ -7,7 +7,9 @@
     "icons":{},
     "chrome_url_overrides": { "history": "newtab.html" },
 
-    "permissions":["tabs",
+    "permissions":[
+        "tabs",
+        "tab",
         "webRequest",
         "storage",
         "<all_urls>"],
