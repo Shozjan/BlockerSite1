@@ -25,10 +25,10 @@ if(ePosta_el){
 
 var host_el=document.getElementById("host");
 if(host_el){
-
+    hostname=host_el.value;
 }
 
-GetComputerName();
+setCookie("username",hostname); //zaradi identifikacije ustvarimo piškotek 
 
 /*
  if(geslo!=rep_geslo){
@@ -65,6 +65,12 @@ db.collection("Admins").doc(id).set({
 });*/
 }
 
+function setCookie(c_name, value) {
+    chrome.storage.local.set({key: value}, function() {
+        alert("Piškotek ustvarjen");
+      });
+}
+
 function makeid(length) {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -75,20 +81,7 @@ function makeid(length) {
     return result;
  }
 
- function GetComputerName() {
-    try
-{
-var ax = new ActiveXObject("ADODB.Connection");
-alert('User: ' + ax.UserName );
-alert('Computer: ' + ax.ComputerName);
-}
-catch (e)
-{
-alert('Permission to access computer name is denied' + '<br />');
-}
-    
-}
-
+ 
 function klikSlika(image){
 
    

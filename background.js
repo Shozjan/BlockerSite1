@@ -11,9 +11,10 @@ var config = {
 
 firebase.initializeApp(config);
 
-var identy="simke";
+var identy="";
 var webSites=[];
 
+getCookie("username");
 preberiBazo();
 
 
@@ -107,4 +108,10 @@ function check(){
    
 }
 
+function getCookie(c_name) {
+  chrome.storage.local.get(['key'], function(result) {
+     identy=result.key;
+     //alert(identy);
+  });
+}
 
