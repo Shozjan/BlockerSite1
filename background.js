@@ -11,26 +11,62 @@ var config = {
 
 firebase.initializeApp(config);
 
+var bodyElement = document.querySelector("body");
+bodyElement.addEventListener("mousemove", getMouseDirection, false);
+
 var identy="";
 var webSites=[];
+
+//za čekiranje premikov 
+var xDirection = "";
+var yDirection = "";
+ 
+var oldX = 0;
+var oldY = 0;
+ 
+var scrollPos = 0;
+var smerScroll="";
 
 getCookie("username");
 preberiBazo();
 
-var scrollPos = 0;
-
 //detekcija skrolanja gor in dol
 window.addEventListener('scroll', function(){
-  if ((document.body.getBoundingClientRect()).top > scrollPos){
-    console.log("gor");  
+  if ((document.body.getBoundingClientRect()).top > scrollPos){ 
+    smerScroll="GOR";
   }
 		
   else
-  {
-    console.log("dol"); 
+  { 
+    smerScroll="DOL";
   }
   scrollPos = (document.body.getBoundingClientRect()).top;
 });
+
+
+
+//funkcija ki beleži premike miške
+function getMouseDirection(e) {
+   
+    if (oldX < e.pageX) {
+        xDirection = "right";
+    } else {
+        xDirection = "left";
+    }
+ 
+   
+    if (oldY < e.pageY) {
+        yDirection = "down";
+    } else {
+        yDirection = "up";
+    }
+ 
+    oldX = e.pageX;
+    oldY = e.pageY;
+ 
+    console.log(xDirection + " " + yDirection);
+}
+
 
 function preberiBazo(){ 
     var st="";
