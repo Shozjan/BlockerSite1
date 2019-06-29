@@ -17,6 +17,20 @@ var webSites=[];
 getCookie("username");
 preberiBazo();
 
+var scrollPos = 0;
+
+//detekcija skrolanja gor in dol
+window.addEventListener('scroll', function(){
+  if ((document.body.getBoundingClientRect()).top > scrollPos){
+    console.log("gor");  
+  }
+		
+  else
+  {
+    console.log("dol"); 
+  }
+  scrollPos = (document.body.getBoundingClientRect()).top;
+});
 
 function preberiBazo(){ 
     var st="";

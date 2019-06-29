@@ -9,7 +9,6 @@
 
     "permissions":[
         "tabs",
-        "tab",
         "webRequest",
         "storage",
         "<all_urls>"],
