@@ -70,21 +70,76 @@ function getMouseDirection(e) {
 
 function preberiBazo(){ 
     var st="";
+    var arraySites= {};
    var db = firebase.firestore();
    var docRef = db.collection("Users"); 
     var currentSite = getCurrent(); 
     docRef.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           var user=doc.data();
+         /// alert();
           if(user.hostname==identy){
-            st=user.blocks;       
+            st=user.blocks;    
+            arraySites=user.visitSites;
+            console.log("dol: "+arraySites.length);
+           
+            //seznam strani za blokiranje
             for(var i=0;i<st.length;i++){    
               webSites.push(st[i]);                         
             }
+
+           var obstaja=checkIfExist(arraySites,currentSite);
+
+           //statistika za trenutno obiskano stran
+            for(var j=0;j<arraySites.length;j++){
+
+              if(arraySites[j].site == currentSite){
+                    var stObisk=arraySites[j].visits;
+                    stObisk++;
+                    arraySites[j].visits=stObisk;  
+
+                    docRef.doc(doc.id).update({
+                      visitSites: arraySites
+                     
+                     }).then(function() {
+                      
+                      
+                   });
+                                               
+              }
+            }
+
+            if(!obstaja){
+              var nova={site:currentSite,visits:1};
+              arraySites.push(nova);
+
+              docRef.doc(doc.id).update({
+                visitSites: arraySites
+               
+               }).then(function() {
+                
+                
+             });
+              
+            }
+
+
            checkIfBlocked(webSites,currentSite);       
           }
       });
   });
+}
+
+function checkIfExist(araj,trenutno){
+  var obstaja=false;
+
+for(var i=0;i<araj.length;i++){
+  if(araj[i].site == trenutno){
+    obstaja=true
+}
+}
+  return obstaja;
+
 }
 
 function dodajVbazo(){
