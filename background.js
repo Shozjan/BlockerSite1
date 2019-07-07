@@ -216,7 +216,7 @@ function check(){
 function getCookie(c_name) {
   chrome.storage.local.get(['key'], function(result) {
      identy=result.key;
-     //alert(identy);
+   //  alert(identy);
   });
 }
 

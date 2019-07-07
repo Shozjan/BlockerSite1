@@ -7,16 +7,13 @@ var config = {
     messagingSenderId: "134357434820",
     appId: "1:134357434820:web:cd65a6922fe15eb6"
   };
-  firebase.initializeApp(config);
-
-
+ 
 function reg_user(){
   var db = firebase.firestore();
   
   var ePosta="";
   var hostname="";
-  var pcName="";
-  var blockSites="";
+
 
 var ePosta_el=document.getElementById("eposta");
 if(ePosta_el){
@@ -28,44 +25,37 @@ if(host_el){
     hostname=host_el.value;
 }
 
-setCookie("username",hostname); //zaradi identifikacije ustvarimo piškotek 
-
-/*
- if(geslo!=rep_geslo){
-     alert("Gesli nista enaki!"); 
-     geslo_el.style.border="2px solid red";
-     rep_geslo_el.style.border="2px solid red";
-    
-    }
-
-if(ime==""){
-   alert("ime je obvezno!");
-   ime_el.style.border="2px solid red";
-}
-
 if(ePosta==""){
     alert("Email je obvezen");
     ePosta_el.style.border="2px solid red";
 }
-*/
-/*
+
+if(hostname==""){
+    alert("Hostname je obvezen");
+    ePosta_el.style.border="2px solid red";
+}
+
 var id=makeid(15);
  
-db.collection("Admins").doc(id).set({
-    Ime: ime,
+db.collection("Users").doc(id).set({
+    blocks:[],
     emall: ePosta,
-    geslo: geslo,
-    user_gp :"test"
+    hostname: hostname,
+    admin :"test",
+    visitSites:[]
 })
 .then(function() {
-    alert("uspešno!")
+    alert("Registracija uspešna")
+    setCookie(hostname); //zaradi identifikacije ustvarimo piškotek 
 })
 .catch(function(error) {
     alert("Napaka pri vnosu");
-});*/
+});
 }
 
-function setCookie(c_name, value) {
+
+
+function setCookie(value) {
     chrome.storage.local.set({key: value}, function() {
         alert("Piškotek ustvarjen");
       });
@@ -88,11 +78,13 @@ function klikSlika(image){
     if(image.className =="")
     {
         image.className="clicked";
+        image.style.border="2px solid red";
     }
    
     else
     {
         image.className="";
+        image.style.border="0px solid red";
     }
     
    // image.style.border="2px solid red";
