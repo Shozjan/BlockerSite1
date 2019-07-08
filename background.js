@@ -77,7 +77,7 @@ function preberiBazo(){
     docRef.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
           var user=doc.data();
-         /// alert();
+         
           if(user.hostname==identy){
             st=user.blocks;    
             arraySites=user.visitSites;

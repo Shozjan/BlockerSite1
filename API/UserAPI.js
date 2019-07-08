@@ -12,6 +12,7 @@ function reg_user(){
   var db = firebase.firestore();
   
   var ePosta="";
+  var admin="";
   var hostname="";
 
 
@@ -23,6 +24,11 @@ if(ePosta_el){
 var host_el=document.getElementById("host");
 if(host_el){
     hostname=host_el.value;
+}
+
+var admin_el=document.getElementById("admins");
+if(admin_el){
+    admin=admin_el.value;
 }
 
 if(ePosta==""){
@@ -41,7 +47,7 @@ db.collection("Users").doc(id).set({
     blocks:[],
     emall: ePosta,
     hostname: hostname,
-    admin :"test",
+    admin :admin,
     visitSites:[]
 })
 .then(function() {

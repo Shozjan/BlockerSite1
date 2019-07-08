@@ -1,3 +1,6 @@
+
+var db = firebase.firestore();
+
 chrome.windows.onCreated.addListener(function() {
   chrome.tabs.create({url:"registration.js"});
   });
@@ -19,10 +22,42 @@ $(document).ready(function(){
      gumb.addEventListener('click', dodajVbazo, false);
    }
 
+   var gumb2= document.getElementById('toStatistics');
+   if(gumb2){
+     gumb2.addEventListener('click',spremeniAdminPanel,false);
+   }
+
 });
 
 function spremeniAdminPanel(){
-  window.location.href='statistika.html';
+  var adminName="";
+
+  db.collection("Users").get().then(function(querySnapshot) { 
+    querySnapshot.forEach(function(doc) {
+        var user=doc.data();
+        if(user.hostname==identy){
+          adminName=user.admin;
+        }
+    });
+});
+
+db.collection("Admins").get().then(function(querySnapshot) { 
+  querySnapshot.forEach(function(doc) {
+      var admin=doc.data();
+      if(admin.Ime==adminName){
+        var psw = prompt("Vpiši administratorsko geslo:", "");
+        if(psw==admin.geslo){
+          window.open('statistika.html','_blank');
+        }
+        else{
+          alert("napačno geslo");
+        }
+      }
+  });
+});
+
+
+ 
 }
 
 function check(){
