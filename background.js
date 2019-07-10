@@ -25,22 +25,34 @@ var oldX = 0;
 var oldY = 0;
  
 var scrollPos = 0;
+var odScrollPos=0.0;
 var smerScroll="";
-
+var digits=[];
 getCookie("username");
 preberiBazo();
 
 //detekcija skrolanja gor in dol
 window.addEventListener('scroll', function(){
-  if ((document.body.getBoundingClientRect()).top > scrollPos){ 
-    smerScroll="GOR";
-  }
-		
-  else
-  { 
-    smerScroll="DOL";
-  }
+   if(digits[digits.length-1]==0 && digits[digits.length-2]==0){ //premik na scrool vedno zaokroži na stotice(zadnji dve sta vedno 0)
+    
+    if ((document.body.getBoundingClientRect()).top > scrollPos){ 
+      smerScroll="GOR";
+    }
+      
+    else
+    { 
+      smerScroll="DOL";
+    }
+    odScrollPos=scrollPos;
+   }
+ 
+  
   scrollPos = (document.body.getBoundingClientRect()).top;
+
+  var razl=Number(odScrollPos)-Number(scrollPos); //izračunamo razliko med prejšnjim položajem in sedanjim
+   digits = (""+razl).split("");
+
+ 
 });
 
 
