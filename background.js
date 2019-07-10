@@ -55,28 +55,53 @@ window.addEventListener('scroll', function(){
  
 });
 
-
+     var contXR=0;
+     var contXL=0;
+     var contYD=0;
+     var contYU=0;
 
 //funkcija ki beleži premike miške
 function getMouseDirection(e) {
-   
-    if (oldX < e.pageX) {
+     if (oldX < e.pageX) {
         xDirection = "right";
+        contXR++;
     } else {
         xDirection = "left";
+        contXL++;
     }
  
    
     if (oldY < e.pageY) {
         yDirection = "down";
+        contYD++;
     } else {
         yDirection = "up";
+        contYU++;
     }
  
     oldX = e.pageX;
     oldY = e.pageY;
  
-    console.log(xDirection + " " + yDirection);
+    if(contXR==30){
+      console.log("Right");
+      contXR=0;
+    }
+
+    if(contXL==30){
+      console.log("Left");
+      contXL=0;
+    }
+
+    if(contYD==30){
+      console.log("Down");
+      contYD=0;
+    }
+    
+    if(contYU==30){
+      console.log("Up");
+      contYU=0;
+    }
+  
 }
 
 
