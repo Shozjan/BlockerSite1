@@ -91,22 +91,22 @@ function getMouseDirection(e) {
     oldY = e.pageY;
  
     if(contXR==30){
-      console.log("Right");
+      mouseUpdateBase("desno");
       contXR=0;
     }
 
     if(contXL==30){
-      console.log("Left");
+      mouseUpdateBase("levo");
       contXL=0;
     }
 
     if(contYD==30){
-      console.log("Down");
+      mouseUpdateBase("dol");
       contYD=0;
     }
     
     if(contYU==30){
-      console.log("Up");
+      mouseUpdateBase("gor");
       contYU=0;
     }
   
@@ -145,7 +145,6 @@ function skrolDBase(){
 
 }
 
-
 function skrolDUase(){
   var db = firebase.firestore();
   var currentSite = getCurrent(); 
@@ -162,9 +161,62 @@ function skrolDUase(){
 
             if(arraySites[j].site == currentSite){
                   var skrolUp=arraySites[j].scrlUp;
-                  skrolUp++;
-                  
+                  skrolUp++;                
                   arraySites[j].scrlUp=skrolUp;  
+
+                  docRef.doc(doc.id).update({
+                    visitSites: arraySites
+                   
+                   }).then(function() {                  
+                 });                                             
+            }
+          }    
+        }
+    });
+});
+
+}
+
+
+function mouseUpdateBase(smer){
+  var db = firebase.firestore();
+  var currentSite = getCurrent(); 
+  var docRef = db.collection("Users"); 
+
+  docRef.get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        var user=doc.data();
+    
+        if(user.hostname==identy){
+          arraySites=user.visitSites;
+  
+          for(var j=0;j<arraySites.length;j++){
+
+            if(arraySites[j].site == currentSite){
+                  if(smer=="gor"){
+                    var misG=arraySites[j].mouseU;
+                    misG++;                
+                    arraySites[j].mouseU=misG;  
+                  }
+
+                  if(smer=="dol"){
+                    var misD=arraySites[j].mouseD;
+                    misD++;                
+                    arraySites[j].mouseD=misD; 
+                  }
+
+                  if(smer=="levo"){
+                    var misL=arraySites[j].mouseL;
+                    misL++;                
+                    arraySites[j].mouseL=misL; 
+                  }
+
+                  if(smer=="desno"){
+                    var misR=arraySites[j].mouseR;
+                    misR++;                
+                    arraySites[j].mouseR=misR; 
+                  }
+                  
 
                   docRef.doc(doc.id).update({
                     visitSites: arraySites
@@ -219,7 +271,7 @@ function preberiBazo(){
             }
 
             if(!obstaja){
-              var nova={site:currentSite,visits:1,scrlDo:0,scrlUp:0};
+              var nova={site:currentSite,visits:1,scrlDo:0,scrlUp:0,mouseL:0,mouseR:0,mouseU:0,mouseD:0};
               arraySites.push(nova);
 
               docRef.doc(doc.id).update({
