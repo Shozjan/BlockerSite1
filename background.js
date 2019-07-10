@@ -23,25 +23,36 @@ var yDirection = "";
  
 var oldX = 0;
 var oldY = 0;
- 
+var contXR=0;
+var contXL=0;
+var contYD=0;
+var contYU=0;
+
+
 var scrollPos = 0;
 var odScrollPos=0.0;
 var smerScroll="";
 var digits=[];
+
+
 getCookie("username");
 preberiBazo();
 
 //detekcija skrolanja gor in dol
 window.addEventListener('scroll', function(){
+
+
    if(digits[digits.length-1]==0 && digits[digits.length-2]==0){ //premik na scrool vedno zaokroži na stotice(zadnji dve sta vedno 0)
     
     if ((document.body.getBoundingClientRect()).top > scrollPos){ 
       smerScroll="GOR";
+      skrolDUase();
     }
       
     else
     { 
       smerScroll="DOL";
+      skrolDBase();
     }
     odScrollPos=scrollPos;
    }
@@ -55,10 +66,7 @@ window.addEventListener('scroll', function(){
  
 });
 
-     var contXR=0;
-     var contXL=0;
-     var contYD=0;
-     var contYU=0;
+    
 
 //funkcija ki beleži premike miške
 function getMouseDirection(e) {
@@ -104,6 +112,73 @@ function getMouseDirection(e) {
   
 }
 
+function skrolDBase(){
+  var db = firebase.firestore();
+  var currentSite = getCurrent(); 
+  var docRef = db.collection("Users"); 
+
+  docRef.get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        var user=doc.data();
+    
+        if(user.hostname==identy){
+          arraySites=user.visitSites;
+  
+          for(var j=0;j<arraySites.length;j++){
+
+            if(arraySites[j].site == currentSite){
+                  var skrolDown=arraySites[j].scrlDo;
+                  skrolDown++;
+                  
+                  arraySites[j].scrlDo=skrolDown;  
+
+                  docRef.doc(doc.id).update({
+                    visitSites: arraySites
+                   
+                   }).then(function() {                  
+                 });                                             
+            }
+          }    
+        }
+    });
+});
+
+}
+
+
+function skrolDUase(){
+  var db = firebase.firestore();
+  var currentSite = getCurrent(); 
+  var docRef = db.collection("Users"); 
+
+  docRef.get().then(function(querySnapshot) {
+    querySnapshot.forEach(function(doc) {
+        var user=doc.data();
+    
+        if(user.hostname==identy){
+          arraySites=user.visitSites;
+  
+          for(var j=0;j<arraySites.length;j++){
+
+            if(arraySites[j].site == currentSite){
+                  var skrolUp=arraySites[j].scrlUp;
+                  skrolUp++;
+                  
+                  arraySites[j].scrlUp=skrolUp;  
+
+                  docRef.doc(doc.id).update({
+                    visitSites: arraySites
+                   
+                   }).then(function() {                  
+                 });                                             
+            }
+          }    
+        }
+    });
+});
+
+}
+
 
 function preberiBazo(){ 
     var st="";
@@ -138,29 +213,22 @@ function preberiBazo(){
                     docRef.doc(doc.id).update({
                       visitSites: arraySites
                      
-                     }).then(function() {
-                      
-                      
-                   });
-                                               
+                     }).then(function() {                  
+                   });                                             
               }
             }
 
             if(!obstaja){
-              var nova={site:currentSite,visits:1};
+              var nova={site:currentSite,visits:1,scrlDo:0,scrlUp:0};
               arraySites.push(nova);
 
               docRef.doc(doc.id).update({
                 visitSites: arraySites
                
-               }).then(function() {
-                
-                
+               }).then(function() {            
              });
               
             }
-
-
            checkIfBlocked(webSites,currentSite);       
           }
       });
@@ -176,7 +244,6 @@ for(var i=0;i<araj.length;i++){
 }
 }
   return obstaja;
-
 }
 
 function dodajVbazo(){
