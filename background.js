@@ -41,7 +41,6 @@ preberiBazo();
 //detekcija skrolanja gor in dol
 window.addEventListener('scroll', function(){
 
-
    if(digits[digits.length-1]==0 && digits[digits.length-2]==0){ //premik na scrool vedno zaokroži na stotice(zadnji dve sta vedno 0)
     
     if ((document.body.getBoundingClientRect()).top > scrollPos){ 
@@ -56,14 +55,12 @@ window.addEventListener('scroll', function(){
     }
     odScrollPos=scrollPos;
    }
- 
-  
+
   scrollPos = (document.body.getBoundingClientRect()).top;
 
   var razl=Number(odScrollPos)-Number(scrollPos); //izračunamo razliko med prejšnjim položajem in sedanjim
    digits = (""+razl).split("");
 
- 
 });
 
     
