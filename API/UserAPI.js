@@ -16,6 +16,7 @@ var config = {
   var slika4=false;
   var slika5=false;
   var slika6=false;
+  var star_rang="nedefiniran";
   
   var slika = document.getElementById('slika');
   if(slika){
@@ -63,6 +64,7 @@ function reg_user(){
           blocks:[],
           emall: ePosta,
           hostname: hostname,
+          old_rang:star_rang,
           admin :admin,
           visitSites:[]
       })
@@ -108,6 +110,7 @@ function klikSlika(){
         selectPics++;
         slika=true;
         console.log(selectPics);
+        star_rang="srednji";
     }
    
     else if(selectPics<3 && image.className !="")
@@ -128,6 +131,9 @@ function klikSlika1(){
         selectPics++;
         slika1=true;
         console.log(selectPics);
+        if(slika){
+            star_rang="srednji";
+        }
     }
    
     else if(selectPics<3 && image.className !="")
@@ -148,6 +154,7 @@ function klikSlika2(){
         selectPics++;
         slika2=true;
         console.log(selectPics);
+        star_rang="mladi";
     }
    
     else if(selectPics<3 && image.className !="")
@@ -168,6 +175,9 @@ function klikSlika3(){
         image.style.border="2px solid red";
         selectPics++;
         slika3=true;
+        if(slika){
+            star_rang="starejši";
+        }
         console.log(selectPics);
     }
    
@@ -188,6 +198,10 @@ function klikSlika4(){
         image.style.border="2px solid red";
         selectPics++;
         slika4=true;
+
+        if(slika1||slika2){
+            star_rang="mladina";
+        }
     }
    
     else if(selectPics<3 && image.className !="")
@@ -207,6 +221,10 @@ function klikSlika5(){
         image.style.border="2px solid red";
         selectPics++;
         slika5=true;
+
+      
+            star_rang="otroci";
+        
     }
    
     else if(selectPics<3 && image.className !="")
@@ -226,6 +244,7 @@ function klikSlika6(){
         image.style.border="2px solid red";
         selectPics++;
         slika6=true;
+        star_rang="otroci";
     }
    
     else if(selectPics<3 && image.className !="")
