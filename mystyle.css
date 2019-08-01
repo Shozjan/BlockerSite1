@@ -2,6 +2,52 @@
     float: left;
     width: 50%;
   }
+
+  .headSt{
+	  width: 100%;
+	  height: 150px;
+	  background-color: lightslategray;
+  }
+
+ .stats{
+	 padding: 0%;
+	 height: 100%;
+ }
+
+ .userST{
+	 text-align: right;
+	 padding-right:10%;
+	 padding-top: 20px; 
+ }
+
+ .out{
+	 height: 100%;
+ }
+
+ .nameST{
+	 text-align: center;
+ }
+
+ .bodySt{
+	padding-left: 20%;
+	padding-right: 20%;
+	
+ }
+
+ .blocks{
+	 width:50%;
+	 position: relative;
+	 float: left;
+	 padding-top: 3%;
+	 border-right: 1px solid gray;
+ }
+
+ .stat{
+	 width:50%;
+	 position: relative;
+	 float: right;
+	 padding-top: 3%;
+ }
   
   /* Clear floats after the columns */
   .row:after {
