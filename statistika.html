@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="mystyle.css">
     <script src="https://www.gstatic.com/firebasejs/4.1.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <title>BlockWebsites</title>
 
 </head>
@@ -26,12 +27,16 @@
                    <div class="bodySt">
                     <div class="blocks">
                         <h4>Seznam blokiranih spletnih strani</h4>
-                        <p id="blocksSite"></p>
+                        <div id="blocksSite"></div>
+                        <br>
                     </div>
 
                     <div class="stat">
-                            <h4>Obiski spletnih strani</h4>
-                            <p id="visits"></p>
+                          
+                            <div id="visits"></div>
+                            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+                            <br>
                         </div>
     
                    </div>
